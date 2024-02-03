@@ -1,19 +1,13 @@
 "use client";
 
 import Skeleton from "@/app/components/Skeleton";
-import {
-  Avatar,
-  Button,
-  Container,
-  DropdownMenu,
-  Flex,
-  Text,
-} from "@radix-ui/themes";
+import { Avatar, Container, DropdownMenu, Flex, Text } from "@radix-ui/themes";
 import classNames from "classnames";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiFillBug } from "react-icons/ai";
+import LogoutButton from "./components/LogoutButton";
 
 const NavBar = () => {
   const MainLinks = [
@@ -91,9 +85,7 @@ const AuthStatus = () => {
         <DropdownMenu.Label>
           <Text size="2">{session!.user!.email}</Text>
         </DropdownMenu.Label>
-        <Button onClick={() => signOut()} color="red" variant="soft" mt="2">
-          Log out
-        </Button>
+        <LogoutButton />
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   );
