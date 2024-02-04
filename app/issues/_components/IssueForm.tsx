@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, Callout, TextField, Select } from "@radix-ui/themes";
 import { useForm as UseForm, Controller } from "react-hook-form";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import axios from "axios";
@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { patchIssueSchema } from "@/app/validationSchemas";
 import z from "zod";
 import Spinner from "@/app/components/Spinner";
-import { Issue } from "@prisma/client";
+import { Issue, Status } from "@prisma/client";
 import SimpleMDE from "react-simplemde-editor";
 
 type IssueFormData = z.infer<typeof patchIssueSchema>;
@@ -45,6 +45,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     }
   });
 
+  const statuses: Status[] = ["OPEN", "IN_PROGRESS", "CLOSED"];
+
   return (
     <div className="max-w-xl">
       {error && (
@@ -53,6 +55,31 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         </Callout.Root>
       )}
       <form className="space-y-3" onSubmit={submit}>
+        {issue && (
+          <Controller
+            name="status"
+            control={control}
+            defaultValue={issue.status}
+            render={({ field }) => (
+              <Select.Root
+                defaultValue={field.value}
+                onValueChange={field.onChange}
+              >
+                <Select.Trigger placeholder="Status..." />
+                <Select.Content>
+                  <Select.Group>
+                    <Select.Label>Suggestions</Select.Label>
+                    {statuses.map((value) => (
+                      <Select.Item key={value} value={value}>
+                        {value}
+                      </Select.Item>
+                    ))}
+                  </Select.Group>
+                </Select.Content>
+              </Select.Root>
+            )}
+          />
+        )}
         <TextField.Root className="px-1.5">
           <TextField.Input
             defaultValue={issue?.title}
