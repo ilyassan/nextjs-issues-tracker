@@ -27,6 +27,8 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
 
   const pageCount = Math.ceil(itemCount / pageSize);
 
+  if (pageCount === 0) return null;
+
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === pageCount;
 

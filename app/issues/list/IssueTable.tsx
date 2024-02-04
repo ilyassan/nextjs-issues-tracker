@@ -1,7 +1,7 @@
 import { IssueStatusBadge, Link } from "@/app/components";
 import { Issue, Status } from "@prisma/client";
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
-import { Table } from "@radix-ui/themes";
+import { Table, Heading } from "@radix-ui/themes";
 import NextLink from "next/link";
 
 export interface IssueQuery {
@@ -18,23 +18,31 @@ interface Props {
 const IssueTable = ({ searchParams, issues }: Props) => {
   return (
     <Table.Root variant="surface">
-      <Table.Header>
-        <Table.Row>
-          {columns.map((column) => (
-            <TableHeaderCell
-              key={column.value}
-              column={column}
-              searchParams={searchParams}
-            />
-          ))}
-        </Table.Row>
-      </Table.Header>
+      {issues.length > 0 ? (
+        <>
+          <Table.Header>
+            <Table.Row>
+              {columns.map((column) => (
+                <TableHeaderCell
+                  key={column.value}
+                  column={column}
+                  searchParams={searchParams}
+                />
+              ))}
+            </Table.Row>
+          </Table.Header>
 
-      <Table.Body>
-        {issues.map((issue) => (
-          <TableRow key={issue.id} issue={issue} />
-        ))}
-      </Table.Body>
+          <Table.Body>
+            {issues.map((issue) => (
+              <TableRow key={issue.id} issue={issue} />
+            ))}
+          </Table.Body>
+        </>
+      ) : (
+        <Heading size="5" m="5" align="center">
+          There's no issues to show
+        </Heading>
+      )}
     </Table.Root>
   );
 };
