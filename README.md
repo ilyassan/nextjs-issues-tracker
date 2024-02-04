@@ -1,6 +1,6 @@
 # Issue Tracker App
 
-Issue Tracker is a project designed to help teams manage and deploy new issues efficiently. It provides features to define the status of an issue (open or closed), assign issues to developers, and supports user authentication and authorization. The project is built using Next.js with TypeScript, utilizing Prisma to connect with a MySQL database, NextAuth for authentication, OAuth Google provider for Google account login, and Tailwind for styling.
+Issue Tracker is a project designed to help teams manage and deploy issues efficiently. using React Nextjs with Mysql database
 
 ## Features
 
