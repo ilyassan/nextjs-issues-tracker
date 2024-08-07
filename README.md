@@ -2,6 +2,10 @@
 
 Issue Tracker is a project designed to help teams manage and deploy issues efficiently. using React Nextjs with Mysql database
 
+## Why Did I Build This?
+
+The goal was to start using Next.js to build full-stack applications using a single technology and language. I aimed to leverage the powerful features provided by the latest versions of Next.js.
+
 ## Features
 
 - Create, Edit, and Delete issues.
